@@ -56,11 +56,11 @@ WORKDIR ${SD_ROOT_DIR}/stable-diffusion-webui
 
 # IMPORT EXPECTED DATASETS AND ALL PROVIDED EMBEDDINGS
 COPY models/model.ckpt ./models/Stable-diffusion/sd-v1-4.ckpt
-COPY ESRGAN/4xESRGAN.pth ./
+# COPY ESRGAN/4xESRGAN.pth ./
 COPY embeddings/ ./embeddings/
-COPY docker/environment.yaml docker/environment.yaml
-COPY docker/entrypoint.sh entrypoint.sh
-RUN chmod +x entrypoint.sh
+# COPY docker/environment.yaml docker/environment.yaml
+# COPY docker/entrypoint.sh entrypoint.sh
+# RUN chmod +x entrypoint.sh
 
 # SETUP ANACONDA ENVIRONMENT FOR WEBUI
 # RUN conda env create -f docker/environment.yaml
@@ -83,7 +83,7 @@ RUN conda clean -a -y
 # RUN git clone https://github.com/CompVis/stable-diffusion.git repositories/stable-diffusion
 # RUN git clone https://github.com/CompVis/taming-transformers.git repositories/taming-transformers
 # RUN git clone https://github.com/CompVis/latent-diffusion.git repositories/latent-diffusion
-# RUN git clone https://github.com/sczhou/CodeFormer.git repositories/CodeFormer
+RUN git clone https://github.com/sczhou/CodeFormer.git repositories/CodeFormer
 # RUN git clone https://github.com/salesforce/BLIP.git repositories/BLIP
 
 # RUN LAUNCH.PY WITH A TEMPORARY WEBUI.PY,
@@ -101,8 +101,8 @@ RUN mv webui-8ef2cfb4-1648-464d-b1ee-f4068c17a36c.py webui.py
 # RUN pip install git+https://github.com/crowsonkb/k-diffusion.git --prefer-binary
 # RUN pip install git+https://github.com/TencentARC/GFPGAN.git --prefer-binary
 # RUN pip install -r repositories/CodeFormer/requirements.txt --prefer-binary
-# RUN pip install -r requirements.txt --prefer-binary
-# RUN pip install --prefer-binary -U opencv-python-headless
+RUN pip install -r requirements.txt --prefer-binary
+RUN pip install --prefer-binary -U opencv-python-headless
 
 # SETUP REVERSE PROXY, MOVE DEFAULT CONF FILE TO DIRECTORY FOR NGINX CONFIG MOUNT
 # NOT THE CLEANEST SOLUTION, BUT PROBABLY THE SIMPLEST FOR THE END USER
